@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
+import { getAllUsers } from "./services/user.service";
+import type { UserDto } from "./types/UserDto";
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<UserDto[]>([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/users").then((response) => {
-      setUsers(response.data);
-    });
+    setUsers(getAllUsers());
   }, []);
   return (
     <>
