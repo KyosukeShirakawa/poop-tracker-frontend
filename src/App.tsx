@@ -6,10 +6,35 @@ import FoodList from "./components/FoodList";
 
 function App() {
   const [users, setUsers] = useState<UserDto[]>([]);
-
+  const [newUserName, setNewUserName] = useState("");
+  const [newUserPassword, setNewUserPassword] = useState("");
   useEffect(() => {
     getAllUsers().then((response) => setUsers(response.data));
   }, []);
+
+  const createUser = (e) => {
+    e.preventDefault();
+
+    const createUserDto = {
+      name: newUserName,
+      password: newUserPassword,
+    };
+    createUser(createUserDto).then((response) => {
+      setUsers(users.concat(response.data));
+      setNewUserName("");
+      setNewUserPassword("");
+    });
+  };
+
+  const handleUserNameChange = (e) => {
+    console.log(e.target.value);
+    setNewUserName(e.target.value);
+  };
+  const handleUserPasswordChange = (e) => {
+    console.log(e.target.value);
+    setNewUserName(e.target.value);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold mb-5">p**p</h1>
@@ -22,6 +47,11 @@ function App() {
           </div>
         </div>
       ))}
+      <form onSubmit={createUser}>
+        <input value={newUserName} onChange={handleUserNameChange} />
+        <input value={newUserPassword} onChange={handleUserPasswordChange} />
+        <button type="submit">Create</button>
+      </form>
     </div>
   );
 }
