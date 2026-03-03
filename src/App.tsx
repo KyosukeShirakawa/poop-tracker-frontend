@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { getAllUsers } from "./services/user.service";
 import type { UserDto } from "./types/UserDto";
+import FoodList from "./components/FoodList";
 
 function App() {
   const [users, setUsers] = useState<UserDto[]>([]);
@@ -16,27 +17,8 @@ function App() {
         <div className="mb-4 flex flex-col items-center" key={u.id}>
           <h2 className="text-2xl font-bold mb-4">{u.name}</h2>
           <div className="flex gap-16">
-            {" "}
-            <div className="mb-4">
-              <h4 className="text-xl font-bold">safe food list</h4>
-              <ul>
-                {u.safeFoodList.map((f) => (
-                  <li className="list-disc" key={f.id}>
-                    {f.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-xl font-bold">avoid food list</h4>
-              <ul>
-                {u.avoidFoodList.map((f) => (
-                  <li className="list-disc" key={f.id}>
-                    {f.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <FoodList title="safe food list" foodlist={u.safeFoodList} />
+            <FoodList title="avoid food list" foodlist={u.avoidFoodList} />
           </div>
         </div>
       ))}
