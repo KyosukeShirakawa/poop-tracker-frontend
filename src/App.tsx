@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { getAllUsers } from "./services/user.service";
+import { getAllUsers, createUser } from "./services/user.service";
 import type { UserDto } from "./types/UserDto";
 import FoodList from "./components/FoodList";
+import type { CreateUserDto } from "./types/CreateUserDto";
 
 function App() {
   const [users, setUsers] = useState<UserDto[]>([]);
@@ -12,27 +13,19 @@ function App() {
     getAllUsers().then((response) => setUsers(response.data));
   }, []);
 
-  const createUser = (e) => {
+  const userCreation = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const createUserDto = {
+    const createUserDto: CreateUserDto = {
       name: newUserName,
       password: newUserPassword,
     };
     createUser(createUserDto).then((response) => {
-      setUsers(users.concat(response.data));
+      console.log(response.data);
+      setUsers(users.concat(response.data as unknown as UserDto));
       setNewUserName("");
       setNewUserPassword("");
     });
-  };
-
-  const handleUserNameChange = (e) => {
-    console.log(e.target.value);
-    setNewUserName(e.target.value);
-  };
-  const handleUserPasswordChange = (e) => {
-    console.log(e.target.value);
-    setNewUserName(e.target.value);
   };
 
   return (
@@ -47,9 +40,17 @@ function App() {
           </div>
         </div>
       ))}
-      <form onSubmit={createUser}>
-        <input value={newUserName} onChange={handleUserNameChange} />
-        <input value={newUserPassword} onChange={handleUserPasswordChange} />
+      <form onSubmit={userCreation}>
+        <input
+          type="text"
+          value={newUserName}
+          onChange={(e) => setNewUserName(e.target.value)}
+        />
+        <input
+          type="text"
+          value={newUserPassword}
+          onChange={(e) => setNewUserPassword(e.target.value)}
+        />
         <button type="submit">Create</button>
       </form>
     </div>

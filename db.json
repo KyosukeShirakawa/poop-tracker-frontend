@@ -1,98 +1,106 @@
-{"users" : [
-  {
-    "id": 1,
-    "name": "Kyo",
-    "logs": [
-      {
-        "id": 1,
-        "date": "2026-02-21",
-        "poopDTO": {
-          "size": "BIG",
-          "color": "BROWN",
-          "softness": "NORMAL"
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Kyo",
+      "logs": [
+        {
+          "id": 1,
+          "date": "2026-02-21",
+          "poopDTO": {
+            "size": "BIG",
+            "color": "BROWN",
+            "softness": "NORMAL"
+          },
+          "foodsEaten": []
         },
-        "foodsEaten": []
-      },
-      {
-        "id": 34,
-        "date": "2026-02-23",
-        "poopDTO": {
-          "size": "GINORMOUS",
-          "color": "DARK_BROWN",
-          "softness": "SOFT"
+        {
+          "id": 34,
+          "date": "2026-02-23",
+          "poopDTO": {
+            "size": "GINORMOUS",
+            "color": "DARK_BROWN",
+            "softness": "SOFT"
+          },
+          "foodsEaten": [
+            {
+              "id": 12,
+              "name": "chips"
+            },
+            {
+              "id": 1,
+              "name": "Banana"
+            },
+            {
+              "id": 11,
+              "name": "onion"
+            },
+            {
+              "id": 4,
+              "name": "chicken thigh"
+            },
+            {
+              "id": 9,
+              "name": "butter"
+            }
+          ]
         },
-        "foodsEaten": [
-          {
-            "id": 12,
-            "name": "chips"
-          },
-          {
-            "id": 1,
-            "name": "Banana"
-          },
-          {
-            "id": 11,
-            "name": "onion"
-          },
-          {
-            "id": 4,
-            "name": "chicken thigh"
-          },
-          {
-            "id": 9,
-            "name": "butter"
-          }
-        ]
-      },
-      {
-        "id": 37,
-        "date": "2026-02-24",
-        "poopDTO": null,
-        "foodsEaten": []
-      }
-    ],
-    "safeFoodList": [
-      {
-        "id": 1,
-        "name": "Banana"
-      },
-      {
-        "id": 10,
-        "name": "rice"
-      },
-      {
-        "id": 4,
-        "name": "chicken thigh"
-      }
-    ],
-    "avoidFoodList": [
-      {
-        "id": 18,
-        "name": "sweet potatoes"
-      },
-      {
-        "id": 19,
-        "name": "almonds"
-      }
-    ]
-  },
-  {
-    "id": 14,
-    "name": "Fanni",
-    "logs": [
-      {
-        "id": 36,
-        "date": "2026-02-23",
-        "poopDTO": null,
-        "foodsEaten": [
-          {
-            "id": 14,
-            "name": "broccoli"
-          }
-        ]
-      }
-    ],
-    "safeFoodList": [],
-    "avoidFoodList": []
-  }
-]}
+        {
+          "id": 37,
+          "date": "2026-02-24",
+          "poopDTO": null,
+          "foodsEaten": []
+        }
+      ],
+      "safeFoodList": [
+        {
+          "id": 1,
+          "name": "Banana"
+        },
+        {
+          "id": 10,
+          "name": "rice"
+        },
+        {
+          "id": 4,
+          "name": "chicken thigh"
+        }
+      ],
+      "avoidFoodList": [
+        {
+          "id": 18,
+          "name": "sweet potatoes"
+        },
+        {
+          "id": 19,
+          "name": "almonds"
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "name": "Fanni",
+      "logs": [
+        {
+          "id": 36,
+          "date": "2026-02-23",
+          "poopDTO": null,
+          "foodsEaten": [
+            {
+              "id": 14,
+              "name": "broccoli"
+            }
+          ]
+        }
+      ],
+      "safeFoodList": [],
+      "avoidFoodList": []
+    },
+    {
+      "id": "bf50",
+      "name": "Aai",
+      "password": "aai2026"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
