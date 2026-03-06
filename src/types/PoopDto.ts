@@ -1,28 +1,10 @@
-enum Size {
-  Very_small = "VERY_SMALL",
-  Small = "SMALL",
-  Normal = "NORMAL",
-  Big = "BIG",
-  Ginormous = "GINORMOUS"
-}
+type Size = "VERY_SMALL" | "SMALL" | "NORMAL" |"BIG" |"GINORMOUS";
 
-enum Color {
-  Light_brown = "LIGHT_BROWN",
-  Brown = "BROWN",
-  Dark_brown = "DARK_BROWN",
-  Pitch_black = "PITCH_BLACK",
-  Red = "RED"
-}
+type Color = "LIGHT_BROWN" | "BROWN" | "DARK_BROWN" | "PITCH_BLACK" | "RED";
 
-enum Softness {
-  Watery = "WATERY",
-  Soft = "SOFT",
-  Normal = "NORMAL",
-  Hard = "HARD",
-  Rock = "ROCK"
-}
+type Softness = "WATERY" | "SOFT" | "NORMAL" | "HARD" | "ROCK";
 
-export type Poop = {
+export type PoopDTO = {
   size:  Size;
   color: Color;
   softness: Softness;

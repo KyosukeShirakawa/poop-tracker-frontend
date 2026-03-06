@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import { getAllUsers, createUser } from "../services/user.service";
-import type { UserDto } from "../types/UserDto";
-import type { CreateUserDto } from "../types/CreateUserDto";
-import UserList from "../components/UserList";
+import { getAllUsers, createUser } from "../../services/user.service";
+import type { UserDto } from "../../types/UserDto";
+import type { CreateUserDto } from "../../types/CreateUserDto";
+import { Link } from "react-router-dom";
 
-function App() {
+const AdminUsersPage = () => {
   const [users, setUsers] = useState<UserDto[]>([]);
-  const [newUserName, setNewUserName] = useState("");
-  const [newUserPassword, setNewUserPassword] = useState("");
   useEffect(() => {
     getAllUsers().then((response) => setUsers(response.data));
   }, []);
+  console.log(users);
+  const [newUserName, setNewUserName] = useState("");
+  const [newUserPassword, setNewUserPassword] = useState("");
 
   const userCreation = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -31,7 +31,14 @@ function App() {
   return (
     <div className="flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold mb-5">p**p</h1>
-      <UserList users={users} />
+      <ul>
+        {users.map((u) => (
+          <li key={u.id}>
+            <Link to={`/users/${u.id}`}>{u.name}</Link>
+          </li>
+        ))}
+      </ul>
+
       <form onSubmit={userCreation}>
         <input
           type="text"
@@ -47,6 +54,6 @@ function App() {
       </form>
     </div>
   );
-}
+};
 
-export default App;
+export default AdminUsersPage;

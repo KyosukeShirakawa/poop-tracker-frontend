@@ -1,9 +1,9 @@
 import type { Food } from "./Food";
-import type { Poop } from "./PoopDto";
+import type { PoopDTO } from "./PoopDto";
 
 export type DailyLog = {
   id: number;
   date: string;
-  poop: Poop;
-  foodsEaten: Food[]
+  poopDTO?: PoopDTO | null;
+  foodsEaten?: Food[]
 }
