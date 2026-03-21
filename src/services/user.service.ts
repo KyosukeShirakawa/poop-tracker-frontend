@@ -8,7 +8,7 @@ export const getAllUsers = () => {
 }
 
 export const getUserById = (id: string) => {
-  return axios.get<UserDto>(`${BASE_URL}/users/${id}`)
+  return axios.get<UserDto>(`${BASE_URL}/users/${id}`).then( response => response.data)
 }
 
 export const createUser = (createUserDto : CreateUserDto) => {
