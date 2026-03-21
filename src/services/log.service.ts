@@ -3,8 +3,8 @@ import type { UserDto } from "../types/UserDto";
 import type { DailyLog } from "../types/DailyLogDto";
 const BASE_URL=import.meta.env.VITE_BACKEND_URL;
 
-export const getLogById = (userId: string, logId: string) => {
-  return axios.get<UserDto[]>(`${BASE_URL}/users/${userId}/logs/${logId}`);
+export const getLogByDate = async (userId: string, date: string) => {
+  return axios.get<DailyLog>(`${BASE_URL}/users/${userId}/logs/${date}`).then(response => response.data);
 }
 
 export const getLogsByUserId = async (userId: string) => {

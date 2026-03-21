@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import type { DailyLog } from "../types/DailyLogDto";
 import { getLogsByUserId } from "../services/log.service";
@@ -28,7 +28,7 @@ const DashboardPage = () => {
         <h4>name: {user.username}</h4>
         <div className="flex flex-col">
           {logs.map((l) => (
-            <Link key={l.id} to={`/logs/${l.id}`}>
+            <Link key={l.id} to={`/logs/${l.date}`}>
               {l.date}
             </Link>
           ))}
