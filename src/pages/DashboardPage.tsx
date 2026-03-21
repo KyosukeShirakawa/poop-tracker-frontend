@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import type { DailyLog } from "../types/DailyLogDto";
 import { getLogsByUserId } from "../services/log.service";
@@ -7,14 +7,9 @@ import { getLogsByUserId } from "../services/log.service";
 const DashboardPage = () => {
   const { user } = useContext(UserContext);
   const [logs, setLogs] = useState<DailyLog[]>([]);
-  const navigate = useNavigate();
 
   if (!user) {
-    return (
-      <div>
-        <button onClick={() => navigate("/login")}>Log in</button>
-      </div>
-    );
+    return <Navigate to="/login" />;
   }
 
   useEffect(() => {
