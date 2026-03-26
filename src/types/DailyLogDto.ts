@@ -7,3 +7,8 @@ export type DailyLog = {
   poopDTO?: PoopDTO | null;
   foodsEaten?: Food[]
 }
+
+export interface CreateDailyLogForm {
+  poopDTO: PoopDTO;
+  foodsEaten: string[];
+}

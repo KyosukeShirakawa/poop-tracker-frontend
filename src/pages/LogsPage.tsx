@@ -31,7 +31,6 @@ const LogsPage = () => {
   return (
     <div>
       <h2>{log.date}</h2>
-
       {log.poopDTO && (
         <div>
           <h4>Poop</h4>
