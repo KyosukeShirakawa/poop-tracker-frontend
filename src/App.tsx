@@ -5,7 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/admin/AdminPage";
 import AdminUsersPage from "./pages/admin/AdminUsersPage";
 import User from "./pages/admin/AdminUserPage";
-import LogsPage from "./pages/LogsPage";
+import SingleLogPage from "./pages/SingleLogPage";
 import { UserContextProvider } from "./context/UserContext";
 import CreateLogPage from "./pages/CreateLogPage";
 
@@ -27,7 +27,7 @@ const App = () => {
 
         <Routes>
           <Route path="/dashboard/:id" element={<DashboardPage />} />
-          <Route path="/logs/:id" element={<LogsPage />} />
+          <Route path="/logs/:id" element={<SingleLogPage />} />
           <Route path="/logs/new" element={<CreateLogPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPage />} />

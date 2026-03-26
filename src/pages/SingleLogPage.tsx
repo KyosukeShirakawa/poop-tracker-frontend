@@ -5,7 +5,7 @@ import { getLogByDate } from "../services/log.service";
 import { UserContext } from "../context/UserContext";
 import { ColorEnum, SizeEnum, SoftnessEnum } from "../types/PoopDto";
 
-const LogsPage = () => {
+const SingleLogPage = () => {
   const { id } = useParams();
   const { user } = useContext(UserContext);
   const [log, setLog] = useState<CreateDailyLogForm | null>(null);
@@ -93,4 +93,4 @@ const LogsPage = () => {
   );
 };
 
-export default LogsPage;
+export default SingleLogPage;
