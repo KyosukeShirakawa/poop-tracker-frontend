@@ -28,7 +28,7 @@ const CreateLogPage = () => {
   };
 
   return (
-    <div>
+    <div className="content">
       <h2>Create Log</h2>
       <div>
         <LogForm

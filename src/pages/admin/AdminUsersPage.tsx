@@ -29,8 +29,8 @@ const AdminUsersPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold mb-5">p**p</h1>
+    <div className="content">
+      <h2>Users</h2>
       <ul>
         {users.map((u) => (
           <li key={u.id}>

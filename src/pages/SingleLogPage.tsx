@@ -44,7 +44,7 @@ const SingleLogPage = () => {
     }
   };
   return (
-    <div>
+    <div className="content">
       <h2>{logDate}</h2>
       <LogForm initialData={log} onSubmit={handleSubmitForm} />
     </div>

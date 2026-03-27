@@ -17,11 +17,20 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className="content">
       <h2>Log in</h2>
-      <form onSubmit={(e) => handleClickLogin(e)}>
-        username: <input type="text" name="username" />
-        password: <input type="text" name="password" />
+      <form
+        className="flex flex-col gap-4"
+        onSubmit={(e) => handleClickLogin(e)}
+      >
+        <div className="flex flex-col">
+          <label>username</label>
+          <input type="text" name="username" />
+        </div>
+        <div className="flex flex-col">
+          <label>password</label>
+          <input type="text" name="password" />
+        </div>
         <button>log in</button>
       </form>
     </div>

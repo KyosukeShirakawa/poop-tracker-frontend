@@ -25,13 +25,13 @@ const DashboardPage = () => {
     deleteLog(user.id, logId);
   };
   return (
-    <div>
+    <div className="flex flex-col items-center p-10 gap-2">
       <h2>Dashboard</h2>
-      <div>
+      <div className="flex flex-col items-center gap-2">
         <h4>{user.username}</h4>
         <div className="flex flex-col">
           {logs.map((l) => (
-            <div key={l.id}>
+            <div className="flex gap-3" key={l.id}>
               <Link to={`/logs/${l.date}`}>{l.date}</Link>
               <button onClick={() => handleClickDeleteLog(l.id)}>Delete</button>
             </div>

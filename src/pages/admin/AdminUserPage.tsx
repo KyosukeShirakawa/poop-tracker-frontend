@@ -22,8 +22,8 @@ const User = () => {
   }
 
   return (
-    <div className="mb-4 flex flex-col items-center">
-      <h2 className="text-2xl font-bold mb-4">{user.name}</h2>
+    <div className="content">
+      <h2>{user.name}</h2>
       <div className="flex gap-16">
         <FoodList title="safe food list" foodlist={user.safeFoodList} />
         <FoodList title="avoid food list" foodlist={user.avoidFoodList} />
