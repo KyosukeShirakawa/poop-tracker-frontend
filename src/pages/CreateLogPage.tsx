@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import type { CreateDailyLogForm } from "../types/DailyLogDto";
-import type { Food } from "../types/Food";
-import { getAllFoods } from "../services/food.service";
 import { createLog } from "../services/log.service";
 import LogForm from "../components/LogForm";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const CreateLogPage = () => {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate();
 
   // const [allFoods, setAllFoods] = useState<Food[]>([]);
 
@@ -23,6 +23,7 @@ const CreateLogPage = () => {
     if (user?.id) {
       const createdLog = await createLog(user.id, dailyLog);
       console.log(createdLog);
+      navigate(`/dashboard/${user.id}`);
     }
   };
 
@@ -32,7 +33,7 @@ const CreateLogPage = () => {
       <div>
         <LogForm
           initialData={{
-            poopDTO: { size: "NORMAL", color: "BROWN", softness: "NORMAL" },
+            poopDTO: null,
             foodsEaten: [],
           }}
           onSubmit={handleSubmitForm}

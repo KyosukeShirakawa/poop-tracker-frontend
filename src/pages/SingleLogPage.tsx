@@ -1,15 +1,15 @@
 import { Navigate, useParams } from "react-router-dom";
-import type { CreateDailyLogForm, DailyLog } from "../types/DailyLogDto";
+import type { CreateDailyLogForm } from "../types/DailyLogDto";
 import { useContext, useEffect, useState } from "react";
-import { getLogByDate } from "../services/log.service";
+import { getLogByDate, updateLog } from "../services/log.service";
 import { UserContext } from "../context/UserContext";
-import { ColorEnum, SizeEnum, SoftnessEnum } from "../types/PoopDto";
+import LogForm from "../components/LogForm";
 
 const SingleLogPage = () => {
   const { id } = useParams();
   const { user } = useContext(UserContext);
   const [log, setLog] = useState<CreateDailyLogForm | null>(null);
-  const [logId, setLogId] = useState<number | null>(null);
+  const [logId, setLogId] = useState<string | null>(null);
   const [logDate, setLogDate] = useState<string>("");
 
   if (!user) {
@@ -23,7 +23,7 @@ const SingleLogPage = () => {
   useEffect(() => {
     const fetchLog = async () => {
       const data = await getLogByDate(user.id, id);
-      setLogId(data.id);
+      setLogId(String(data.id));
       setLogDate(data.date);
       setLog({
         poopDTO: data.poopDTO,
@@ -37,58 +37,16 @@ const SingleLogPage = () => {
     return <div>loading....</div>;
   }
 
-  const handleOnChangeFood = (ind: number, e) => {
-    const updatedFoods = [...log.foodsEaten];
-    updatedFoods[ind] = e.target.value;
-    setLog({ ...log, foodsEaten: updatedFoods });
+  const handleSubmitForm = async (data: CreateDailyLogForm) => {
+    if (user?.id) {
+      const updatedLog = await updateLog(user.id, logId, data);
+      console.log(updatedLog);
+    }
   };
-  const handleSubmitForm = () => {};
   return (
     <div>
       <h2>{logDate}</h2>
-      <form onSubmit={handleSubmitForm}>
-        <fieldset>
-          <legend>Poop</legend>
-          <label>Poop</label>
-          <select name="size" id="">
-            {Object.entries(SizeEnum).map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-          <select name="color" id="">
-            {Object.entries(ColorEnum).map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-          <select name="softness" id="">
-            {Object.entries(SoftnessEnum).map(([value, label]) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </fieldset>
-        <fieldset>
-          <legend>Foods you ate</legend>
-          {log.foodsEaten.map((food, ind) => (
-            <input
-              key={ind}
-              type="text"
-              value={food}
-              onChange={(e) => handleOnChangeFood(ind, e)}
-            />
-          ))}
-        </fieldset>
-        <button type="button" onClick={() => handleAddFood()}>
-          Add Food
-        </button>
-
-        <button type="submit">submit</button>
-      </form>
+      <LogForm initialData={log} onSubmit={handleSubmitForm} />
     </div>
   );
 };
