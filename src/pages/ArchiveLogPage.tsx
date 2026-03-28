@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import type { DailyLog } from "../types/DailyLogDto";
 import { deleteLog, getLogsByUserId } from "../services/log.service";
+import { Navigate, Link } from "react-router-dom";
+import type { DailyLog } from "../types/DailyLogDto";
 
-const DashboardPage = () => {
+const ArchiveLogPage = () => {
   const { user } = useContext(UserContext);
   const [logs, setLogs] = useState<DailyLog[]>([]);
 
@@ -27,7 +27,7 @@ const DashboardPage = () => {
   };
   return (
     <div className="content">
-      <h2>Dashboard</h2>
+      <h2>History</h2>
       <div className="flex flex-col items-center gap-2">
         <h4>{user.username}</h4>
         <div className="flex flex-col gap-2">
@@ -46,4 +46,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default ArchiveLogPage;

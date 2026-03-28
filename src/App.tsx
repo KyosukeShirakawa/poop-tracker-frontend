@@ -8,6 +8,7 @@ import User from "./pages/admin/AdminUserPage";
 import SingleLogPage from "./pages/SingleLogPage";
 import { UserContextProvider } from "./context/UserContext";
 import CreateLogPage from "./pages/CreateLogPage";
+import ArchiveLogPage from "./pages/ArchiveLogPage";
 
 const App = () => {
   return (
@@ -16,6 +17,9 @@ const App = () => {
         <nav className="flex gap-3 p-3 bg-gray-200">
           <Link className="bg-black p-2 rounded text-white" to={"/dashboard/1"}>
             Dashboard
+          </Link>
+          <Link className="bg-black p-2 rounded text-white" to={"/logs"}>
+            History
           </Link>
           <Link className="bg-black p-2 rounded text-white" to={"/login"}>
             Log in
@@ -27,6 +31,7 @@ const App = () => {
 
         <Routes>
           <Route path="/dashboard/:id" element={<DashboardPage />} />
+          <Route path="/logs/" element={<ArchiveLogPage />} />
           <Route path="/logs/:date" element={<SingleLogPage />} />
           <Route path="/logs/new" element={<CreateLogPage />} />
           <Route path="/login" element={<LoginPage />} />
