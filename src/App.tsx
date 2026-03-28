@@ -27,7 +27,7 @@ const App = () => {
 
         <Routes>
           <Route path="/dashboard/:id" element={<DashboardPage />} />
-          <Route path="/logs/:id" element={<SingleLogPage />} />
+          <Route path="/logs/:date" element={<SingleLogPage />} />
           <Route path="/logs/new" element={<CreateLogPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPage />} />

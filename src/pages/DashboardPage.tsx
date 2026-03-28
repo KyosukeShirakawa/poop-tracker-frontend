@@ -33,7 +33,9 @@ const DashboardPage = () => {
           {logs.map((l) => (
             <div className="flex gap-3" key={l.id}>
               <Link to={`/logs/${l.date}`}>{l.date}</Link>
-              <button onClick={() => handleClickDeleteLog(l.id)}>Delete</button>
+              <button onClick={() => handleClickDeleteLog(String(l.id))}>
+                Delete
+              </button>
             </div>
           ))}
         </div>

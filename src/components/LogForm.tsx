@@ -24,7 +24,7 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const updatedFoods = [...dailyLog.foodsEaten];
-    updatedFoods[ind] = e.target.value;
+    updatedFoods[ind].name = e.target.value;
     setDailyLog({ ...dailyLog, foodsEaten: updatedFoods });
   };
   const handleOnChangePoop = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -39,7 +39,13 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
     });
   };
   const handleAddFood = () => {
-    setDailyLog({ ...dailyLog, foodsEaten: [...dailyLog.foodsEaten, ""] });
+    setDailyLog((prev) => ({
+      ...prev,
+      foodsEaten: [
+        ...prev.foodsEaten,
+        { tempId: crypto.randomUUID(), name: "" },
+      ],
+    }));
   };
 
   const handleClickSetPoop = () => {
@@ -58,6 +64,12 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
         },
       }));
     }
+  };
+
+  const handleClickRemove = (ind: number) => {
+    const newFoodsEaten = dailyLog.foodsEaten.filter((f, i) => i !== ind);
+    console.log(newFoodsEaten);
+    setDailyLog((prev) => ({ ...prev, foodsEaten: newFoodsEaten }));
   };
   return (
     <form
@@ -122,12 +134,16 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
           <legend>Foods you ate</legend>
           <div className="flex gap-2">
             {dailyLog.foodsEaten.map((food, ind) => (
-              <input
-                key={ind}
-                type="text"
-                value={food}
-                onChange={(e) => handleOnChangeFood(ind, e)}
-              />
+              <div className="flex" key={food.tempId}>
+                <input
+                  type="text"
+                  value={food.name}
+                  onChange={(e) => handleOnChangeFood(ind, e)}
+                />
+                <button onClick={() => handleClickRemove(ind)} type="button">
+                  Remove
+                </button>
+              </div>
             ))}
           </div>
         </div>
