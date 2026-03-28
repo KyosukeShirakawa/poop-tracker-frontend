@@ -17,3 +17,45 @@ button {
 .content h2 {
   font-size: 2rem;
 }
+
+/* Dashboard */
+.card {
+  border: 1px solid black;
+  padding: 16px;
+}
+.card h2{
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+
+}
+.card-content {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+}
+.card-content h4 {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.card ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.card li {
+  padding: 5px 10px;
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 10px;
+}
+
+/* Dashboard */
+
+/* Single Log */
+
+
+
+
+/* Single Log */

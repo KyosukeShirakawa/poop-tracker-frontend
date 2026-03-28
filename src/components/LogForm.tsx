@@ -80,8 +80,8 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
       }}
     >
       <button type="button" onClick={handleClickSetPoop}>
-        Set Poop
-      </button>{" "}
+        {dailyLog.poopDTO ? "unset poop" : "set poop"}
+      </button>
       {dailyLog.poopDTO ? (
         <fieldset>
           <div className="flex flex-col items-center gap-2">

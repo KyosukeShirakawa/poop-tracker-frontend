@@ -1,4 +1,4 @@
-import { Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { type CreateDailyLogForm } from "../types/DailyLogDto";
 import { useContext, useEffect, useState } from "react";
 import { getLogByDate, updateLog } from "../services/log.service";
@@ -49,7 +49,15 @@ const SingleLogPage = () => {
   };
   return (
     <div className="content">
-      <h2>{date}</h2>
+      <div className="flex items-center gap-2">
+        <Link to={`/logs/2026-03-27`}>
+          <p>＜</p>
+        </Link>
+        <h2>{date}</h2>
+        <Link to={`/logs/2026-03-28`}>
+          <p>＞</p>
+        </Link>
+      </div>
       {log ? (
         <LogForm initialData={log} onSubmit={handleSubmitForm} />
       ) : (
