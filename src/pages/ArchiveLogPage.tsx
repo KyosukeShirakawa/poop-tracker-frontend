@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { deleteLog, getLogsByUserId } from "../services/log.service";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import type { DailyLog } from "../types/DailyLogDto";
+import { getDate } from "../utils/date";
 
 const ArchiveLogPage = () => {
   const { user } = useContext(UserContext);
   const [logs, setLogs] = useState<DailyLog[]>([]);
+  const navigate = useNavigate();
 
   if (!user) {
     return <Navigate to="/login" />;
@@ -40,7 +42,9 @@ const ArchiveLogPage = () => {
             </div>
           ))}
         </div>
-        <Link to={"/logs/new"}>create log</Link>
+        <button onClick={() => navigate(`/logs/${getDate()}`)}>
+          create log
+        </button>
       </div>
     </div>
   );

@@ -18,3 +18,7 @@ export interface CreateDailyLogForm {
   poopDTO: PoopDTO | null;
   foodsEaten: FoodForm[];
 }
+
+export interface CreateDailyLogRequest extends CreateDailyLogForm {
+  date: string;
+}

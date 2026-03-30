@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import type { DailyLog } from "../types/DailyLogDto";
 import { getLogByDate } from "../services/log.service";
+import { getDate } from "../utils/date";
 
 const DashboardPage = () => {
   const { user } = useContext(UserContext);
   const [log, setLog] = useState<DailyLog>();
+  const navigate = useNavigate();
 
   if (!user) {
     return <Navigate to="/login" />;
@@ -14,8 +16,7 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const fetchLog = async () => {
-      const date = new Date().toISOString().split("T")[0];
-      console.log(date);
+      const date = getDate();
       const data = await getLogByDate(user.id, date);
       setLog(data);
     };
@@ -56,7 +57,9 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        <Link to={"/logs/new"}>create log</Link>
+        <button onClick={() => navigate(`/logs/${getDate()}`)}>
+          create log
+        </button>
       </div>
     </div>
   );
