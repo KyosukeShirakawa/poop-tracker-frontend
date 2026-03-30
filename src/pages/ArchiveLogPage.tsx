@@ -31,7 +31,6 @@ const ArchiveLogPage = () => {
     <div className="content">
       <h2>History</h2>
       <div className="flex flex-col items-center gap-2">
-        <h4>{user.username}</h4>
         <div className="flex flex-col gap-2">
           {logs.map((l) => (
             <div className="flex gap-3" key={l.id}>

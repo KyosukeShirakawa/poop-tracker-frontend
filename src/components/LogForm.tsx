@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import type { CreateDailyLogForm } from "../types/DailyLogDto";
-import {
-  ColorEnum,
-  SizeEnum,
-  SoftnessEnum,
-  type PoopDTO,
-} from "../types/PoopDto";
+import { type PoopDTO } from "../types/PoopDto";
+import PoopField from "./PoopField";
+import FoodField from "./FoodField";
 
 interface LogFormProps {
-  initialData: CreateDailyLogForm;
+  dailyLog: CreateDailyLogForm;
+  onChange: React.Dispatch<React.SetStateAction<CreateDailyLogForm | null>>;
   onSubmit: (data: CreateDailyLogForm) => void;
 }
 
-const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
-  const [dailyLog, setDailyLog] = useState<CreateDailyLogForm>(initialData);
-
+const LogForm = ({ dailyLog, onChange, onSubmit }: LogFormProps) => {
   useEffect(() => {
-    setDailyLog(initialData);
-  }, [initialData]);
+    onChange(dailyLog);
+  }, [dailyLog]);
 
   const handleOnChangeFood = (
     ind: number,
@@ -25,12 +21,12 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
   ) => {
     const updatedFoods = [...dailyLog.foodsEaten];
     updatedFoods[ind].name = e.target.value;
-    setDailyLog({ ...dailyLog, foodsEaten: updatedFoods });
+    onChange({ ...dailyLog, foodsEaten: updatedFoods });
   };
   const handleOnChangePoop = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
 
-    setDailyLog({
+    onChange({
       ...dailyLog,
       poopDTO: {
         ...dailyLog.poopDTO,
@@ -39,7 +35,7 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
     });
   };
   const handleAddFood = () => {
-    setDailyLog((prev) => ({
+    onChange((prev) => ({
       ...prev,
       foodsEaten: [
         ...prev.foodsEaten,
@@ -50,12 +46,12 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
 
   const handleClickSetPoop = () => {
     if (dailyLog.poopDTO !== null) {
-      setDailyLog((prev) => ({
+      onChange((prev) => ({
         ...prev,
         poopDTO: null,
       }));
     } else {
-      setDailyLog((prev) => ({
+      onChange((prev) => ({
         ...prev,
         poopDTO: {
           size: "NORMAL",
@@ -69,7 +65,8 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
   const handleClickRemove = (ind: number) => {
     const newFoodsEaten = dailyLog.foodsEaten.filter((f, i) => i !== ind);
     console.log(newFoodsEaten);
-    setDailyLog((prev) => ({ ...prev, foodsEaten: newFoodsEaten }));
+    onChange((prev) => ({ ...prev, foodsEaten: newFoodsEaten }));
+    console.log("after removing a food" + dailyLog);
   };
   return (
     <form
@@ -83,75 +80,21 @@ const LogForm = ({ initialData, onSubmit }: LogFormProps) => {
         {dailyLog.poopDTO ? "unset poop" : "set poop"}
       </button>
       {dailyLog.poopDTO ? (
-        <fieldset>
-          <div className="flex flex-col items-center gap-2">
-            <legend>How was your poop?</legend>
-            <div>
-              <label>Size</label>
-              <select
-                name="size"
-                value={dailyLog.poopDTO?.size}
-                onChange={handleOnChangePoop}
-              >
-                {Object.entries(SizeEnum).map(([value, label]) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-              <label>Color</label>
-              <select
-                name="color"
-                value={dailyLog.poopDTO?.color}
-                onChange={handleOnChangePoop}
-              >
-                {Object.entries(ColorEnum).map(([value, label]) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-              <label>Softness</label>
-              <select
-                name="softness"
-                value={dailyLog.poopDTO?.softness}
-                onChange={handleOnChangePoop}
-              >
-                {Object.entries(SoftnessEnum).map(([value, label]) => (
-                  <option key={value} value={value}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </fieldset>
+        <PoopField dailyLog={dailyLog} onChange={handleOnChangePoop} />
       ) : (
         <div>You haven't pooped yet</div>
       )}
-      <fieldset>
-        <div className="flex flex-col items-center gap-2">
-          <legend>Foods you ate</legend>
-          <div className="flex gap-2">
-            {dailyLog.foodsEaten.map((food, ind) => (
-              <div className="flex" key={food.tempId}>
-                <input
-                  type="text"
-                  value={food.name}
-                  onChange={(e) => handleOnChangeFood(ind, e)}
-                />
-                <button onClick={() => handleClickRemove(ind)} type="button">
-                  Remove
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </fieldset>
-      <button type="button" onClick={() => handleAddFood()}>
-        Add Food
-      </button>
-      <button type="submit">submit</button>
+      <FoodField
+        dailyLog={dailyLog}
+        onChange={handleOnChangeFood}
+        onClick={handleClickRemove}
+      />
+      <div className="flex gap-2">
+        <button type="button" onClick={() => handleAddFood()}>
+          Add Food
+        </button>
+        <button type="submit">submit</button>
+      </div>
     </form>
   );
 };

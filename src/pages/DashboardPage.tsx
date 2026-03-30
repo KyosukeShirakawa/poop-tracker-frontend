@@ -33,17 +33,17 @@ const DashboardPage = () => {
           <div className="card">
             <h2>Poop</h2>
             <div className="card-content">
-              <div>
+              <div className="card-content-item">
                 <h4>Size</h4>
-                {log?.poopDTO?.size}
+                <div>{log?.poopDTO?.size}</div>
               </div>
-              <div>
+              <div className="card-content-item">
                 <h4>Color</h4>
-                {log?.poopDTO?.color}
+                <div>{log?.poopDTO?.color}</div>
               </div>
-              <div>
+              <div className="card-content-item">
                 <h4>Consistency</h4>
-                {log?.poopDTO?.softness}
+                <div>{log?.poopDTO?.softness}</div>
               </div>
             </div>
           </div>

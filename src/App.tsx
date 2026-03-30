@@ -8,25 +8,13 @@ import User from "./pages/admin/AdminUserPage";
 import SingleLogPage from "./pages/SingleLogPage";
 import { UserContextProvider } from "./context/UserContext";
 import ArchiveLogPage from "./pages/ArchiveLogPage";
+import Header from "./components/Header";
 
 const App = () => {
   return (
     <UserContextProvider>
       <Router>
-        <nav className="flex gap-3 p-3 bg-gray-200">
-          <Link className="bg-black p-2 rounded text-white" to={"/dashboard/1"}>
-            Dashboard
-          </Link>
-          <Link className="bg-black p-2 rounded text-white" to={"/logs"}>
-            History
-          </Link>
-          <Link className="bg-black p-2 rounded text-white" to={"/login"}>
-            Log in
-          </Link>
-          <Link className="bg-black p-2 rounded text-white" to={"/admin"}>
-            Admin
-          </Link>
-        </nav>
+        <Header />
 
         <Routes>
           <Route path="/dashboard/:id" element={<DashboardPage />} />

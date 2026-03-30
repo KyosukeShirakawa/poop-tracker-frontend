@@ -1,4 +1,4 @@
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import {
   type CreateDailyLogForm,
   type CreateDailyLogRequest,
@@ -7,7 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { createLog, getLogByDate, updateLog } from "../services/log.service";
 import { UserContext } from "../context/UserContext";
 import LogForm from "../components/LogForm";
-import { getPrevDate, getNextDate } from "../utils/date";
+import DateControl from "../components/DateControl";
 
 const SingleLogPage = () => {
   const { date } = useParams();
@@ -15,8 +15,6 @@ const SingleLogPage = () => {
   const { user } = useContext(UserContext);
   const [log, setLog] = useState<CreateDailyLogForm | null>(null);
   const [logId, setLogId] = useState<string | null>(null);
-
-  const navigate = useNavigate();
 
   if (!user) {
     return <Navigate to="/login" />;
@@ -73,27 +71,9 @@ const SingleLogPage = () => {
 
   return (
     <div className="content">
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={() => navigate(`/logs/${getPrevDate(date)}`)}
-        >
-          <p>＜</p>
-        </button>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => navigate(`/logs/${e.target.value}`)}
-        />
-        <button
-          type="button"
-          onClick={() => navigate(`/logs/${getNextDate(date)}`)}
-        >
-          <p>＞</p>
-        </button>
-      </div>
+      <DateControl date={date} />
       {log ? (
-        <LogForm initialData={log} onSubmit={handleSubmitForm} />
+        <LogForm dailyLog={log} onChange={setLog} onSubmit={handleSubmitForm} />
       ) : (
         <div>loading...</div>
       )}

@@ -7,6 +7,16 @@ button {
   color: white;
   padding: 4px 10px;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 30px;
+}
+.header-left, .header-right {
+  display: flex;
+  gap: 8px;
+}
 .content {
   display: flex;
   flex-direction: column;
@@ -31,12 +41,23 @@ button {
 }
 .card-content {
   display: flex;
-  gap: 40px;
+  gap: 20px;
   justify-content: center;
 }
-.card-content h4 {
+
+.card-content-item h4 {
   font-weight: 600;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.card-content-item div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  width: 100px;
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 50%;
 }
 
 .card ul {
@@ -48,7 +69,7 @@ button {
 .card li {
   padding: 5px 10px;
   border: 1px solid rgb(202, 202, 202);
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 /* Dashboard */
