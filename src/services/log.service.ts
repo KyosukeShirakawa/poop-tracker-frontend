@@ -29,8 +29,6 @@ export const createLog = (userId: string, dailyLog: CreateDailyLogForm) => {
 }
 
 export const updateLog = (userId: string, logId: string, dailyLog: CreateDailyLogForm) => {
-  console.log(dailyLog)
-  const logToSend = {...dailyLog, }
   return axios.put<DailyLog>(`${BASE_URL}/users/${userId}/logs/${logId}`, dailyLog).then(response => response.data);
 }
 
