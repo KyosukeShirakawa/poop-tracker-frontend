@@ -5,7 +5,7 @@ import { Navigate, Link, useNavigate } from "react-router-dom";
 import type { DailyLog } from "../types/DailyLogDto";
 import { getDate } from "../utils/date";
 
-const ArchiveLogPage = () => {
+const HistoryPage = () => {
   const { user } = useContext(UserContext);
   const [logs, setLogs] = useState<DailyLog[]>([]);
   const navigate = useNavigate();
@@ -28,12 +28,14 @@ const ArchiveLogPage = () => {
     setLogs((prev) => prev.filter((l) => String(l.id) !== logId));
   };
   return (
-    <div className="content">
-      <h2>History</h2>
+    <div className="main">
+      <div className="page-title">
+        <h2>History</h2>
+      </div>
       <div className="flex flex-col items-center gap-2">
         <div className="flex flex-col gap-2">
           {logs.map((l) => (
-            <div className="flex gap-3" key={l.id}>
+            <div className="flex gap-3 items-center" key={l.id}>
               <Link to={`/logs/${l.date}`}>{l.date}</Link>
               <button onClick={() => handleClickDeleteLog(String(l.id))}>
                 Delete
@@ -49,4 +51,4 @@ const ArchiveLogPage = () => {
   );
 };
 
-export default ArchiveLogPage;
+export default HistoryPage;

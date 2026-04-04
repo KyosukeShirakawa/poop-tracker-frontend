@@ -1,11 +1,20 @@
-input {
+input, select {
   border: 1px solid black;
-    padding: 4px 10px;
+  padding: 4px 10px;
+  border-radius: 0.2rem;
+
 }
-button {
+button, .btn {
   background-color: black;
   color: white;
-  padding: 4px 10px;
+  padding: 6px 10px;
+  border-radius: 0.2rem;
+  transition-duration: 0.4s;
+}
+
+button:hover, .btn:hover {
+
+opacity: 0.5;
 }
 
 .header {
@@ -17,20 +26,36 @@ button {
   display: flex;
   gap: 8px;
 }
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 20px;
+}
+.main h2 {
+  font-size: 2rem;
+}
+
+.main h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.page-title {
+  margin-bottom: 20px;
+}
+
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 20px;
-}
-.content h2 {
-  font-size: 2rem;
 }
 
-/* Dashboard */
+/* Home */
 .card {
   border: 1px solid black;
+  border-radius: 0.2rem;
   padding: 16px;
 }
 .card h2{
@@ -72,11 +97,37 @@ button {
   border-radius: 15px;
 }
 
-/* Dashboard */
+/* Home */
+
+/* Single Log */
+
+.log-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+
+
 
 /* Single Log */
 
 
-
-
-/* Single Log */
+/* Food list */
+.foodlist {
+  display: flex;
+  gap: 30px;
+}
+.food-category {
+  border: 1px solid black;
+  border-radius: 0.2rem;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.food-category h3{
+  margin-bottom: 10px;
+}
+/* Food list */

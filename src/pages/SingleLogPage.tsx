@@ -21,7 +21,7 @@ const SingleLogPage = () => {
   }
 
   if (!date) {
-    return <Navigate to={`/dashboard/${user.id}`} />;
+    return <Navigate to={`/home/${user.id}`} />;
   }
 
   useEffect(() => {
@@ -52,10 +52,9 @@ const SingleLogPage = () => {
   if (!log) {
     return <div>loading....</div>;
   }
-
   const handleSubmitForm = async (formData: CreateDailyLogForm) => {
     if (!user) return;
-
+    console.log(formData);
     if (logId) {
       const updatedLog = await updateLog(user.id, logId, formData);
       console.log(updatedLog);
@@ -70,13 +69,21 @@ const SingleLogPage = () => {
   };
 
   return (
-    <div className="content">
-      <DateControl date={date} />
-      {log ? (
-        <LogForm dailyLog={log} onChange={setLog} onSubmit={handleSubmitForm} />
-      ) : (
-        <div>loading...</div>
-      )}
+    <div className="main">
+      <div className="page-title">
+        <DateControl date={date} />
+      </div>
+      <div className="content">
+        {log ? (
+          <LogForm
+            dailyLog={log}
+            onChange={setLog}
+            onSubmit={handleSubmitForm}
+          />
+        ) : (
+          <div>loading...</div>
+        )}
+      </div>
     </div>
   );
 };

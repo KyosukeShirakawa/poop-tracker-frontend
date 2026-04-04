@@ -13,7 +13,7 @@ const User = () => {
 
   useEffect(() => {
     getUserById(id).then((response) => {
-      setUser(response.data);
+      setUser(response);
     });
   }, [user]);
   console.log(user);
@@ -22,11 +22,15 @@ const User = () => {
   }
 
   return (
-    <div className="content">
-      <h2>{user.name}</h2>
-      <div className="flex gap-16">
-        <FoodList title="safe food list" foodlist={user.safeFoodList} />
-        <FoodList title="avoid food list" foodlist={user.avoidFoodList} />
+    <div className="main">
+      <div className="page-title">
+        <h2>{user.name}</h2>
+      </div>
+      <div className="content">
+        <div className="flex gap-16">
+          <FoodList title="safe food list" foodlist={user.safeFoodList} />
+          <FoodList title="avoid food list" foodlist={user.avoidFoodList} />
+        </div>
       </div>
     </div>
   );

@@ -4,19 +4,22 @@ const Header = () => {
   return (
     <nav className="header">
       <div className="header-left">
-        <Link className="bg-black p-2 rounded text-white" to={"/dashboard/1"}>
-          Dashboard
+        <Link className="btn" to={"/home/1"}>
+          Home
         </Link>
-        <Link className="bg-black p-2 rounded text-white" to={"/logs"}>
+        <Link className="btn" to={"/logs"}>
           History
+        </Link>
+        <Link className="btn" to={"/foodlist"}>
+          My Food
         </Link>
       </div>
 
       <div className="header-right">
-        <Link className="bg-black p-2 rounded text-white" to={"/login"}>
+        <Link className="btn" to={"/login"}>
           Log in
         </Link>
-        <Link className="bg-black p-2 rounded text-white" to={"/admin"}>
+        <Link className="btn" to={"/admin"}>
           Admin
         </Link>
       </div>

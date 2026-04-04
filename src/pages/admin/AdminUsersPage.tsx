@@ -29,29 +29,33 @@ const AdminUsersPage = () => {
   };
 
   return (
-    <div className="content">
-      <h2>Users</h2>
-      <ul>
-        {users.map((u) => (
-          <li key={u.id}>
-            <Link to={`/users/${u.id}`}>{u.name}</Link>
-          </li>
-        ))}
-      </ul>
+    <div className="main">
+      <div className="page-title">
+        <h2>Users</h2>
+      </div>
+      <div className="content">
+        <ul>
+          {users.map((u) => (
+            <li key={u.id}>
+              <Link to={`/users/${u.id}`}>{u.name}</Link>
+            </li>
+          ))}
+        </ul>
 
-      <form onSubmit={userCreation}>
-        <input
-          type="text"
-          value={newUserName}
-          onChange={(e) => setNewUserName(e.target.value)}
-        />
-        <input
-          type="text"
-          value={newUserPassword}
-          onChange={(e) => setNewUserPassword(e.target.value)}
-        />
-        <button type="submit">Create</button>
-      </form>
+        <form onSubmit={userCreation}>
+          <input
+            type="text"
+            value={newUserName}
+            onChange={(e) => setNewUserName(e.target.value)}
+          />
+          <input
+            type="text"
+            value={newUserPassword}
+            onChange={(e) => setNewUserPassword(e.target.value)}
+          />
+          <button type="submit">Create</button>
+        </form>
+      </div>
     </div>
   );
 };

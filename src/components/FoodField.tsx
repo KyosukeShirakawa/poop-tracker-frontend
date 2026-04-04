@@ -1,27 +1,55 @@
-import type { CreateDailyLogForm } from "../types/DailyLogDto";
+import { useContext } from "react";
+import type { FoodForm } from "../types/DailyLogDto";
+import { UserContext } from "../context/UserContext";
 
 interface FoodFieldProps {
-  dailyLog: CreateDailyLogForm;
+  foodsEaten: FoodForm[];
   onChange: (ind: number, e: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick: (ind: number) => void;
+  onClickRemove: (ind: number) => void;
+  onToggleSafe: (food: FoodForm) => void;
 }
 
-const FoodField = ({ dailyLog, onChange, onClick }: FoodFieldProps) => {
+const FoodField = ({
+  foodsEaten,
+  onChange,
+  onClickRemove,
+  onToggleSafe,
+}: FoodFieldProps) => {
+  const { safeFoods } = useContext(UserContext);
   return (
     <fieldset>
-      <div className="flex flex-col items-center gap-2">
-        <legend>Foods you ate</legend>
-        <div className="flex flex-col gap-1">
-          {dailyLog.foodsEaten.map((food, ind) => (
+      <div className="flex flex-col items-center gap-6">
+        <legend className="text-xl font-semibold">Foods you ate</legend>
+        <div className="flex flex-col gap-2">
+          {foodsEaten.map((food, ind) => (
             <div className="flex" key={food.tempId}>
               <input
                 type="text"
                 value={food.name}
                 onChange={(e) => onChange(ind, e)}
               />
-              <button onClick={() => onClick(ind)} type="button">
-                Remove
-              </button>
+              <div className="flex gap-2">
+                <button onClick={() => onClickRemove(ind)} type="button">
+                  Remove
+                </button>
+                {safeFoods.find((f) => f.name === food.name) ? (
+                  <button
+                    className="bg-red-500 text-white"
+                    onClick={() => onToggleSafe(food)}
+                    type="button"
+                  >
+                    - safe
+                  </button>
+                ) : (
+                  <button
+                    className="bg-green-500 text-white"
+                    onClick={() => onToggleSafe(food)}
+                    type="button"
+                  >
+                    + safe
+                  </button>
+                )}
+              </div>
             </div>
           ))}
         </div>

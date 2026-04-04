@@ -1,19 +1,24 @@
-import { useEffect } from "react";
-import type { CreateDailyLogForm } from "../types/DailyLogDto";
+import { useContext } from "react";
+import type { CreateDailyLogForm, FoodForm } from "../types/DailyLogDto";
 import { type PoopDTO } from "../types/PoopDto";
 import PoopField from "./PoopField";
 import FoodField from "./FoodField";
+import { UserContext } from "../context/UserContext";
+import { Navigate } from "react-router-dom";
+import { addSafeFood, removeSafeFood } from "../services/user.service";
 
 interface LogFormProps {
   dailyLog: CreateDailyLogForm;
-  onChange: React.Dispatch<React.SetStateAction<CreateDailyLogForm | null>>;
+  onChange: React.Dispatch<React.SetStateAction<CreateDailyLogForm>>;
   onSubmit: (data: CreateDailyLogForm) => void;
 }
 
 const LogForm = ({ dailyLog, onChange, onSubmit }: LogFormProps) => {
-  useEffect(() => {
-    onChange(dailyLog);
-  }, [dailyLog]);
+  const { user, safeFoods, setSafeFoods } = useContext(UserContext);
+
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
 
   const handleOnChangeFood = (
     ind: number,
@@ -21,18 +26,21 @@ const LogForm = ({ dailyLog, onChange, onSubmit }: LogFormProps) => {
   ) => {
     const updatedFoods = [...dailyLog.foodsEaten];
     updatedFoods[ind].name = e.target.value;
-    onChange({ ...dailyLog, foodsEaten: updatedFoods });
+    onChange((prev) => ({
+      ...prev,
+      foodsEaten: updatedFoods,
+    }));
   };
   const handleOnChangePoop = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
 
-    onChange({
-      ...dailyLog,
+    onChange((prev) => ({
+      ...prev,
       poopDTO: {
         ...dailyLog.poopDTO,
         [name]: value,
       } as PoopDTO,
-    });
+    }));
   };
   const handleAddFood = () => {
     onChange((prev) => ({
@@ -64,30 +72,43 @@ const LogForm = ({ dailyLog, onChange, onSubmit }: LogFormProps) => {
 
   const handleClickRemove = (ind: number) => {
     const newFoodsEaten = dailyLog.foodsEaten.filter((f, i) => i !== ind);
-    console.log(newFoodsEaten);
-    onChange((prev) => ({ ...prev, foodsEaten: newFoodsEaten }));
-    console.log("after removing a food" + dailyLog);
+    onChange((prev) => ({
+      ...prev,
+      foodsEaten: newFoodsEaten,
+    }));
+  };
+  const handleToggleSafe = async (food: FoodForm) => {
+    const isSafe = safeFoods.some((f) => f.name === food.name);
+
+    if (isSafe) {
+      await removeSafeFood(user.id, String(food.id));
+      setSafeFoods((prev) => prev.filter((f) => f.id !== food.id));
+      console.log(safeFoods);
+    } else {
+      const newFood = await addSafeFood(user.id, food);
+      setSafeFoods((prev) => [...prev, newFood]);
+      console.log(safeFoods);
+    }
   };
   return (
     <form
-      className="flex flex-col items-center gap-2"
+      className="log-form"
       onSubmit={(e) => {
         e.preventDefault();
         onSubmit(dailyLog);
       }}
     >
-      <button type="button" onClick={handleClickSetPoop}>
-        {dailyLog.poopDTO ? "unset poop" : "set poop"}
-      </button>
-      {dailyLog.poopDTO ? (
-        <PoopField dailyLog={dailyLog} onChange={handleOnChangePoop} />
-      ) : (
-        <div>You haven't pooped yet</div>
-      )}
+      <PoopField
+        poopDTO={dailyLog.poopDTO}
+        onClick={handleClickSetPoop}
+        onChange={handleOnChangePoop}
+      />
+
       <FoodField
-        dailyLog={dailyLog}
+        foodsEaten={dailyLog.foodsEaten}
         onChange={handleOnChangeFood}
-        onClick={handleClickRemove}
+        onClickRemove={handleClickRemove}
+        onToggleSafe={handleToggleSafe}
       />
       <div className="flex gap-2">
         <button type="button" onClick={() => handleAddFood()}>
