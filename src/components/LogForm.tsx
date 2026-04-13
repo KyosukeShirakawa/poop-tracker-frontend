@@ -110,11 +110,17 @@ const LogForm = ({ dailyLog, onChange, onSubmit }: LogFormProps) => {
         onClickRemove={handleClickRemove}
         onToggleSafe={handleToggleSafe}
       />
-      <div className="flex gap-2">
-        <button type="button" onClick={() => handleAddFood()}>
+      <div className="flex flex-col gap-2">
+        <button
+          className="btn-lg"
+          type="button"
+          onClick={() => handleAddFood()}
+        >
           Add Food
         </button>
-        <button type="submit">submit</button>
+        <button className="btn-lg" type="submit">
+          submit
+        </button>
       </div>
     </form>
   );

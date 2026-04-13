@@ -30,4 +30,5 @@ export type PoopDTO = {
   size:  Size;
   color: Color;
   softness: Softness;
+  score?:number;
 }

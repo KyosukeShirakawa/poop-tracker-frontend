@@ -40,46 +40,56 @@ const HomePage = () => {
         <h2>Today</h2>
       </div>
       <div className="content">
-        <div className="grid gap-4">
-          <div className="card">
+        <div className="card">
+          <div className="card-title">
             <h2>Poop</h2>
-            <div className="card-content">
-              {log?.poopDTO === null ? (
-                <p>You haven't pooped yet</p>
-              ) : (
-                <>
-                  <div className="card-content-item">
-                    <h4>Size</h4>
-                    <div>{log?.poopDTO?.size}</div>
-                  </div>
-                  <div className="card-content-item">
-                    <h4>Color</h4>
-                    <div>{log?.poopDTO?.color}</div>
-                  </div>
-                  <div className="card-content-item">
-                    <h4>Consistency</h4>
-                    <div>{log?.poopDTO?.softness}</div>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-          <div className="card">
-            <h2>Food</h2>
-            {log?.foodsEaten?.length === 0 ? (
-              <p>You haven't logged food</p>
-            ) : (
-              <ul>
-                {log?.foodsEaten?.slice(0, 7).map((f) => (
-                  <li key={f.id ?? f.name}>{f.name}</li>
-                ))}
-              </ul>
+            {log?.poopDTO && (
+              <div className="flex">
+                <h3>
+                  Score <span>{log.poopDTO.score}/12</span>
+                </h3>
+              </div>
             )}
           </div>
-          <button onClick={() => navigate(`/logs/${getDate()}`)}>
-            create log
-          </button>
+          <div className="card-content">
+            {log?.poopDTO === null ? (
+              <p>You haven't pooped yet</p>
+            ) : (
+              <>
+                <div className="card-content-item">
+                  <h4>Size</h4>
+                  <div>{log?.poopDTO?.size}</div>
+                </div>
+                <div className="card-content-item">
+                  <h4>Color</h4>
+                  <div>{log?.poopDTO?.color}</div>
+                </div>
+                <div className="card-content-item">
+                  <h4>Consistency</h4>
+                  <div>{log?.poopDTO?.softness}</div>
+                </div>
+              </>
+            )}
+          </div>
         </div>
+        <div className="card">
+          <h2>Food</h2>
+          {log?.foodsEaten?.length === 0 ? (
+            <p>You haven't logged food</p>
+          ) : (
+            <ul>
+              {log?.foodsEaten?.slice(0, 7).map((f) => (
+                <li key={f.id ?? f.name}>{f.name}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <button
+          className="btn-lg"
+          onClick={() => navigate(`/logs/${getDate()}`)}
+        >
+          create log
+        </button>
       </div>
     </div>
   );

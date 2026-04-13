@@ -10,6 +10,9 @@ const Header = () => {
         <Link className="btn" to={"/logs"}>
           History
         </Link>
+        <Link className="btn" to={"/analysis"}>
+          Analysis
+        </Link>
         <Link className="btn" to={"/foodlist"}>
           My Food
         </Link>

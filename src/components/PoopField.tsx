@@ -1,4 +1,3 @@
-import type { CreateDailyLogForm } from "../types/DailyLogDto";
 import {
   SizeEnum,
   ColorEnum,
@@ -22,7 +21,7 @@ const PoopField = ({ poopDTO, onChange, onClick }: PoopFieldProps) => {
               <legend className="text-xl font-semibold">
                 How was your poop?
               </legend>
-              <button type="button" onClick={onClick}>
+              <button className="btn-md" type="button" onClick={onClick}>
                 Unpoop
               </button>
             </div>
@@ -62,7 +61,7 @@ const PoopField = ({ poopDTO, onChange, onClick }: PoopFieldProps) => {
       ) : (
         <div className="flex gap-4">
           <h4 className="text-xl font-semibold">You haven't pooped yet...</h4>
-          <button type="button" onClick={onClick}>
+          <button className="btn-md" type="button" onClick={onClick}>
             Poop
           </button>
         </div>

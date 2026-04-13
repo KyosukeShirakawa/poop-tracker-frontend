@@ -32,6 +32,7 @@ const SingleLogPage = () => {
     const fetchLog = async () => {
       try {
         const data = await getLogByDate(user.id, date);
+        console.log(data);
 
         setLogId(String(data.id));
         setLog({
@@ -54,12 +55,20 @@ const SingleLogPage = () => {
   }
   const handleSubmitForm = async (formData: CreateDailyLogForm) => {
     if (!user) return;
-    console.log(formData);
+
     if (logId) {
-      const updatedLog = await updateLog(user.id, logId, formData);
+      console.log(logId);
+      console.log(formData);
+      const updatedLog = await updateLog(user.id, Number(logId), formData);
+      setLog({
+        poopDTO: updatedLog.poopDTO ?? null,
+        foodsEaten: (updatedLog.foodsEaten ?? []).map((food) => ({
+          ...food,
+          tempId: String(food.id),
+        })),
+      });
       console.log(updatedLog);
     } else {
-      console.log(date);
       const dataToSend: CreateDailyLogRequest = { ...formData, date: date };
       const createdLog = await createLog(user.id, dataToSend);
       console.log(createdLog);

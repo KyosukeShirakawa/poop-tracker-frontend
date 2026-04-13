@@ -29,20 +29,24 @@ const FoodField = ({
                 onChange={(e) => onChange(ind, e)}
               />
               <div className="flex gap-2">
-                <button onClick={() => onClickRemove(ind)} type="button">
+                <button
+                  className="btn-md"
+                  onClick={() => onClickRemove(ind)}
+                  type="button"
+                >
                   Remove
                 </button>
                 {safeFoods.find((f) => f.name === food.name) ? (
                   <button
-                    className="bg-red-500 text-white"
+                    className="btn-md bg-red-500 text-white"
                     onClick={() => onToggleSafe(food)}
                     type="button"
                   >
-                    - safe
+                    - unsafe
                   </button>
                 ) : (
                   <button
-                    className="bg-green-500 text-white"
+                    className="btn-md bg-green-500 text-white"
                     onClick={() => onToggleSafe(food)}
                     type="button"
                   >

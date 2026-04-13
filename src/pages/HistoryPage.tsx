@@ -32,7 +32,7 @@ const HistoryPage = () => {
       <div className="page-title">
         <h2>History</h2>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="content">
         <div className="flex flex-col gap-2">
           {logs.map((l) => (
             <div className="flex gap-3 items-center" key={l.id}>
@@ -43,7 +43,10 @@ const HistoryPage = () => {
             </div>
           ))}
         </div>
-        <button onClick={() => navigate(`/logs/${getDate()}`)}>
+        <button
+          className="btn-lg"
+          onClick={() => navigate(`/logs/${getDate()}`)}
+        >
           create log
         </button>
       </div>

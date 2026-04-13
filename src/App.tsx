@@ -10,6 +10,7 @@ import { UserContextProvider } from "./context/UserContext";
 import HistoryPage from "./pages/HistoryPage";
 import Header from "./components/Header";
 import MyFoodPage from "./pages/MyFoodPage";
+import AnalysisPage from "./pages/AnalysisPage";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/logs/" element={<HistoryPage />} />
           <Route path="/logs/:date" element={<SingleLogPage />} />
           <Route path="/foodlist" element={<MyFoodPage />} />
+          <Route path="/analysis" element={<AnalysisPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/users" element={<AdminUsersPage />} />

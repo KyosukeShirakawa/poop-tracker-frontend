@@ -12,6 +12,13 @@ button, .btn {
   transition-duration: 0.4s;
 }
 
+.btn-md {
+  width: 80px;
+}
+.btn-lg {
+  width: 350px;
+}
+
 button:hover, .btn:hover {
 
 opacity: 0.5;
@@ -50,6 +57,7 @@ opacity: 0.5;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 }
 
 /* Home */
@@ -58,11 +66,15 @@ opacity: 0.5;
   border-radius: 0.2rem;
   padding: 16px;
 }
-.card h2{
+.card-title{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+}
+.card-title h2 {
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 10px;
-
 }
 .card-content {
   display: flex;
@@ -131,3 +143,32 @@ opacity: 0.5;
   margin-bottom: 10px;
 }
 /* Food list */
+
+.heatmap {
+  max-width: 400px;
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.grid {
+    overflow: scroll;
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, 16px);
+  gap: 4px;
+}
+
+.cell {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+}
+
+.sample {
+  background-color: #14c22b;
+}

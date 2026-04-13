@@ -2,24 +2,34 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import type { Food } from "../types/Food";
 import { Navigate } from "react-router-dom";
-import { getSafeFoods } from "../services/user.service";
+import {
+  addSafeFood,
+  getSafeFoods,
+  removeSafeFood,
+} from "../services/user.service";
+import type { FoodForm } from "../types/DailyLogDto";
 
 const MyFoodPage = () => {
-  const { user } = useContext(UserContext);
-  const [foods, setFoods] = useState<Food[]>([]);
-
+  const { user, safeFoods, setSafeFoods } = useContext(UserContext);
+  const [newFood, setNewFood] = useState<React.ChangeEvent<HTMLInputElement>>();
   if (!user) {
     return <Navigate to="/login" />;
   }
 
-  useEffect(() => {
-    const fetchFoods = async () => {
-      const fetchedFoods = await getSafeFoods(user.id);
-      setFoods(fetchedFoods);
-    };
+  const handleToggleSafe = async (food: Food) => {
+    if (confirm(`Remove ${food.name} from the safe list?`)) {
+      await removeSafeFood(user.id, String(food.id));
+      setSafeFoods((prev) => prev.filter((f) => f.id !== food.id));
+      console.log(safeFoods);
+    }
+  };
 
-    fetchFoods();
-  }, [user, foods]);
+  const handleSubmitNewFood = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    e.preventDefault();
+    await addSafeFood(user.id, newFood);
+  };
 
   return (
     <div className="main">
@@ -27,15 +37,33 @@ const MyFoodPage = () => {
         <h2>Food list</h2>
       </div>
       <div className="content">
-        <div className="foodlist">
-          <ul>
-            {foods.map((f) => (
-              <li key={f.id}>
-                <div>{f.name}</div>
-              </li>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {safeFoods.map((f) => (
+              <tr key={f.id}>
+                <td className="px-4 py-2">
+                  <p className="text-lg ">{f.name}</p>
+                </td>
+                <td>
+                  <button onClick={() => handleToggleSafe(f)}>remove</button>
+                </td>
+              </tr>
             ))}
-          </ul>
-        </div>
+          </tbody>
+        </table>
+        <form onSubmit={(e) => handleSubmitNewFood(e)}>
+          <div className="flex flex-col gap-2">
+            <input type="text" onChange={(e) => setNewFood(e)} />
+            <button className="btn-lg" type="submit">
+              Add Food
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
