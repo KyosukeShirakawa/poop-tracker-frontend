@@ -11,12 +11,23 @@ import type { FoodForm } from "../types/DailyLogDto";
 
 const MyFoodPage = () => {
   const { user, safeFoods, setSafeFoods } = useContext(UserContext);
-  const [newFood, setNewFood] = useState<React.ChangeEvent<HTMLInputElement>>();
+  const [newFood, setNewFood] = useState<FoodForm>({
+    name: "",
+    tempId: crypto.randomUUID(),
+  });
   if (!user) {
     return <Navigate to="/login" />;
   }
 
-  const handleToggleSafe = async (food: Food) => {
+  useEffect(() => {}, [newFood]);
+
+  const handleOnChangeNewFood = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewFood((prev) => ({
+      ...prev,
+      name: e.target.value,
+    }));
+  };
+  const handleToggleRemove = async (food: Food) => {
     if (confirm(`Remove ${food.name} from the safe list?`)) {
       await removeSafeFood(user.id, String(food.id));
       setSafeFoods((prev) => prev.filter((f) => f.id !== food.id));
@@ -28,7 +39,12 @@ const MyFoodPage = () => {
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     e.preventDefault();
-    await addSafeFood(user.id, newFood);
+    const response = await addSafeFood(user.id, newFood);
+    setSafeFoods((prev) => [...prev, response]);
+    setNewFood((prev) => ({
+      name: "",
+      tempId: crypto.randomUUID(),
+    }));
   };
 
   return (
@@ -50,7 +66,7 @@ const MyFoodPage = () => {
                   <p className="text-lg ">{f.name}</p>
                 </td>
                 <td>
-                  <button onClick={() => handleToggleSafe(f)}>remove</button>
+                  <button onClick={() => handleToggleRemove(f)}>remove</button>
                 </td>
               </tr>
             ))}
@@ -58,7 +74,7 @@ const MyFoodPage = () => {
         </table>
         <form onSubmit={(e) => handleSubmitNewFood(e)}>
           <div className="flex flex-col gap-2">
-            <input type="text" onChange={(e) => setNewFood(e)} />
+            <input type="text" onChange={(e) => handleOnChangeNewFood(e)} />
             <button className="btn-lg" type="submit">
               Add Food
             </button>
