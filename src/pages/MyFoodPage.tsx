@@ -50,7 +50,7 @@ const MyFoodPage = () => {
   return (
     <div className="main">
       <div className="page-title">
-        <h2>Food list</h2>
+        <h2>Safe Food list</h2>
       </div>
       <div className="content">
         <table>
@@ -73,11 +73,19 @@ const MyFoodPage = () => {
           </tbody>
         </table>
         <form onSubmit={(e) => handleSubmitNewFood(e)}>
-          <div className="flex flex-col gap-2">
-            <input type="text" onChange={(e) => handleOnChangeNewFood(e)} />
-            <button className="btn-lg" type="submit">
-              Add Food
-            </button>
+          <div className="flex flex-col ">
+            <label>Register New Food</label>
+
+            <div className="flex justify-center gap-2">
+              <input
+                value={newFood.name}
+                type="text"
+                onChange={(e) => handleOnChangeNewFood(e)}
+              />
+              <button className="btn-sm" type="submit">
+                Add
+              </button>
+            </div>
           </div>
         </form>
       </div>

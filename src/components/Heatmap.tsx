@@ -42,10 +42,10 @@ const buildHeatmapData = (logs: DailyLog[], year: number) => {
 
 const getColor = (score: number | null) => {
   if (score === null) return "rgb(202, 202, 202)";
-  if (score >= 10) return "#14c22b";
-  if (score >= 8) return "#56d364";
-  if (score >= 6) return "#56d364";
-  if (score >= 4) return "#b2e2b8";
+  if (score >= 10) return "#02570f";
+  if (score >= 8) return "#009414";
+  if (score >= 6) return "#35d848";
+  if (score >= 4) return "#c2ebc8";
   return "rgb(202, 202, 202)";
 };
 
@@ -75,7 +75,6 @@ const Heatmap = ({ logs }: HeatmapProps) => {
         <div className="cell" style={{ backgroundColor: getColor(6) }}></div>
         <div className="cell" style={{ backgroundColor: getColor(8) }}></div>
         <div className="cell" style={{ backgroundColor: getColor(10) }}></div>
-        <div className="cell sample"></div>
         <span>more</span>
       </div>
     </div>

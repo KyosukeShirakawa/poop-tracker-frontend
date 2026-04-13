@@ -30,7 +30,7 @@ const FoodField = ({
               />
               <div className="flex gap-2">
                 <button
-                  className="btn-md"
+                  className="btn-sm"
                   onClick={() => onClickRemove(ind)}
                   type="button"
                 >
@@ -38,7 +38,7 @@ const FoodField = ({
                 </button>
                 {safeFoods.find((f) => f.name === food.name) ? (
                   <button
-                    className="btn-md bg-red-500 text-white"
+                    className="btn-sm bg-red-500 text-white"
                     onClick={() => onToggleSafe(food)}
                     type="button"
                   >
@@ -46,7 +46,7 @@ const FoodField = ({
                   </button>
                 ) : (
                   <button
-                    className="btn-md bg-green-500 text-white"
+                    className="btn-sm bg-green-500 text-white"
                     onClick={() => onToggleSafe(food)}
                     type="button"
                   >

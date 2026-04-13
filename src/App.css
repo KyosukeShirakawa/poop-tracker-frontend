@@ -12,8 +12,11 @@ button, .btn {
   transition-duration: 0.4s;
 }
 
-.btn-md {
+.btn-sm {
   width: 80px;
+}
+.btn-md {
+  width: 150px;
 }
 .btn-lg {
   width: 350px;
